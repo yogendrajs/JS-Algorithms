@@ -1,23 +1,21 @@
-// hackerrank
-// https://www.hackerrank.com/challenges/picking-numbers/problem
-
- a = [4, 6, 5, 3, 3, 1];
-
-var mainArr = [];
-for (var i = 0; i < a.length; i++){
-  var localArr = [];
-  for (var j = i+1; j < a.length; j++){
-    if ((a[i] - a[j]) <= 1){
-      localArr.push(a[j]);
-    }
-  }localArr.push(a[i]);
-  mainArr.push(localArr);
+function pickingNumbers(a) {
+	// Write your code here
+	a = a.sort((x, y) => x-y);
+	console.log(a);
+	let max = 0;
+	for (let i = 0; i < a.length; i++) {
+		let count = 0;
+		for (let j = i; j < a.length; j++) {
+			if (Math.abs(a[i] - a[j]) <= 1) {
+				count++;
+			}
+		}
+		console.log(count, a[i]);
+		// max = count > max ? count: max;
+		if (count > max) max = count;
+	}
+	console.log(max);
 }
-console.log(mainArr);
-var max = 0;
-for (var i of mainArr){
-  if (i.length > max){
-    max = i.length;
-  }
-}
-console.log(max);
+
+// pickingNumbers([4, 6, 5, 3, 3, 1]);
+pickingNumbers([1, 2, 2, 3, 1, 2]);

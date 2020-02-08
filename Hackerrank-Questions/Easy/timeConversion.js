@@ -1,19 +1,21 @@
-var readline = require('readline-sync');
-var time = readline.question('Enter the time: ');
-if (time.includes("AM")){
-  var hour = time.slice(0,2);
-  if (hour == "12"){
-    console.log("00"+time.slice(2, -2));
-  }else {
-    console.log(time.slice(0, -2));
-  }
+function timeConversion(s) {
+    /*
+     * Write your code here.
+     */
+    let meridian = s.slice(-2);
+
+    if (meridian === 'AM' && parseInt(s.slice(0, 2)) === 12) {
+        console.log ('00' + s.slice(2, -2));
+    }
+    if (meridian === 'PM' && parseInt(s.slice(0, 2)) < 12) {
+        console.log (parseInt(s.slice(0, 2)) + 12 + s.slice(2, -2));
+    }
+    console.log (s.slice(0, -2));
 }
-else if (time.includes("PM")){
-  var hour = time.slice(0,2);
-  if (parseInt(hour) < 12){
-    hour = parseInt(hour)+12;
-    console.log(String(hour) + time.slice(2, -2));
-  }else {
-    console.log(time.slice(0, -2));
-  }
-}
+
+timeConversion('07:05:45AM');
+timeConversion('01:01:00AM');
+timeConversion('01:10:00PM');
+timeConversion('23:32:25PM');
+timeConversion('12:40:22AM');
+timeConversion('12:00:00AM');

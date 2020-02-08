@@ -1,40 +1,51 @@
-var arr = [1, 1, 2, 2, 3];
-var nonrepeatArr = [];
-for (var i = 0; i < arr.length; i++){
-  if (!nonrepeatArr.includes(arr[i])){
-    nonrepeatArr.push(arr[i]);
-  }
-}//console.log(nonrepeatArr);
+function migratoryBirds(arr) {
+    // let dic = {}
+    // for (let i of arr) {
+    // 	if (dic[i] === undefined) {
+    // 		dic[i] = 1;
+    // 	}
+    // 	else {
+    // 		dic[i]++;
+    // 	}
+    // }
+    // console.log(dic)
+    // let max = 0;
+    // for (let i in dic) {
+    // 	console.log(i);
+    // 	if (max < dic[i]) {
+    // 		max = i;
+    // 	}
+    // }
+    // console.log(max);
 
-var maxArr = [];
-var swap = 0;
-var index = 0;
-for (var i = 0; i < nonrepeatArr.length; i++){
-  var count = 0;
-  for (var j = 0; j < arr.length; j++){
-    if (nonrepeatArr[i] == arr[j]){
-      count++;
+    // passed case//////////////////////////
+
+    let dupl = [];
+    let dict = {};
+    arr = arr.sort((a, b) => a-b);
+    let max = 0;
+    let re = 0;
+    for (let i = 0; i < arr.length; i++) {
+        let count = 1;
+        if (!dupl.includes(arr[i])) {
+            dupl.push(arr[i]);
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[i] === arr[j]) {
+                    count++;
+                }
+            }
+            dict[arr[i]] = count;
+            if (max < count) {
+                max = count;
+                re = arr[i];
+            }
+        }
     }
-  }if (count > swap){
-    swap = count;
-    index = i;
-  }
-}console.log(nonrepeatArr[index]);
+    console.log(dict, re);
+    return re;
 
-// var index = maxArr.indexOf(Math.max(...maxArr));
-// console.log(nonrepeatArr[index]);
+    
+}
 
-// var arr = [1, 1, 2, 2, 3];
-// var swap = 0;
-// var number = 0;
-// for (var i = 0; i < arr.length; i++){
-//   var count = 0;
-//   for (var j = i+1; j < arr.length; j++){
-//     if (arr[i] == arr[j]){
-//       count++;
-//     }
-//   }if (count > swap){
-//     swap = count;
-//     number = arr[i];
-//   }
-// }console.log(number);
+migratoryBirds([1, 4, 4, 4, 5, 3]);
+migratoryBirds([1, 2, 3, 4, 5, 4, 3, 2, 1, 3, 4]);
